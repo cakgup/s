@@ -1,12 +1,6 @@
 # CakGup Short Link
 
-**CakGup Short Link** adalah aplikasi shortlink sederhana berbasis **GitHub Pages**, **Google Apps Script**, dan **Google Sheets**. Aplikasi ini dapat digunakan untuk membuat tautan pendek dengan format seperti:
-
-```text
-https://username.github.io/s/nama-link
-```
-
-Aplikasi ini dibuat agar mudah diduplikasi, dimodifikasi, dan digunakan oleh siapa pun, termasuk pengurus masjid, komunitas, sekolah, organisasi, atau pribadi yang membutuhkan layanan tautan pendek sederhana.
+**CakGup Short Link** adalah aplikasi shortlink sederhana berbasis **GitHub Pages**, **Google Apps Script**, dan **Google Sheets**. Aplikasi ini dapat digunakan untuk membuat tautan pendek.
 
 > Made with ❤️ by CakGup — didedikasikan untuk ummat.
 
@@ -62,7 +56,7 @@ Fitur yang tersedia:
 Struktur utama source code:
 
 ```text
-s/
+link/
 ├── .nojekyll
 ├── index.html
 ├── 404.html
@@ -123,7 +117,7 @@ link
 Jika username GitHub Anda adalah `username`, maka alamat GitHub Pages nantinya dapat menjadi:
 
 ```text
-https://username.github.io/s/
+https://username.github.io/link/
 ```
 
 ### 5.2 Upload Source Code
@@ -209,7 +203,7 @@ const CONFIG = {
   SPREADSHEET_ID: "",
   SHEET_LINKS: "links",
   SHEET_LOGS: "click_logs",
-  BASE_SHORTLINK: "https://username.github.io/s",
+  BASE_SHORTLINK: "https://username.github.io/link",
   API_TOKEN: "CHANGE_ME_API_TOKEN"
 };
 ```
@@ -217,7 +211,7 @@ const CONFIG = {
 Ubah:
 
 ```javascript
-BASE_SHORTLINK: "https://username.github.io/s"
+BASE_SHORTLINK: "https://username.github.io/link"
 ```
 
 menjadi alamat GitHub Pages Anda.
@@ -269,19 +263,19 @@ Ambil Spreadsheet ID dari URL.
 Contoh URL Google Sheets:
 
 ```text
-https://docs.google.com/spreadsheets/d/1AbCdEfGhIjKlMnOpQrStUvWxYz/edit
+https://docs.google.com/spreadsheets/d/abcd/edit
 ```
 
 Spreadsheet ID-nya adalah:
 
 ```text
-1AbCdEfGhIjKlMnOpQrStUvWxYz
+abcd
 ```
 
 Lalu isi pada konfigurasi:
 
 ```javascript
-SPREADSHEET_ID: "1AbCdEfGhIjKlMnOpQrStUvWxYz"
+SPREADSHEET_ID: "abcd"
 ```
 
 Kemudian jalankan:
@@ -503,7 +497,7 @@ Hasil yang diharapkan:
 ```json
 {
   "success": true,
-  "message": "Cakgup Shortlink API aktif"
+  "message": "Shortlink API aktif"
 }
 ```
 
