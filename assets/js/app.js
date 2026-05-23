@@ -60,7 +60,7 @@
     const path = window.location.pathname.replace(/\/+/g, "/");
     const parts = path.split("/").filter(Boolean);
 
-    // GitHub Pages project path: /link or /link/ adalah halaman utama, bukan slug.
+    // GitHub Pages project path: /s or /s/ adalah halaman utama, bukan slug.
     // Sebelumnya /link terbaca sebagai slug "link", sehingga muncul error
     // "Shortlink /link belum tersedia".
     if (parts[0] === "s") {
@@ -167,10 +167,10 @@
 
     renderShell(`
       <div class="topbar">
-        <span class="topbar-badge">SHORT LINK</span>
+        <span class="topbar-badge">❤</span>
         <button id="logoutButton" class="link-button" type="button">Keluar</button>
       </div>
-      ${renderBrandHeader("Daftar tautan ringkas, rapi, dan mudah dibagikan.")}
+      ${renderBrandHeader("ringkas, mudah, dan cepat untuk berbagi tautan penting.")}
 
       <section class="toolbar-card">
         <label class="label" for="searchInput">Cari Tautan</label>
