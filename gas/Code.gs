@@ -23,7 +23,7 @@ const CONFIG = {
   SHEET_LINKS: "links",
   SHEET_LOGS: "click_logs",
 
-  BASE_SHORTLINK: "https://cakgup.github.io/link",
+  BASE_SHORTLINK: "https://cakgup.github.io/s",
 
   // Token untuk doPost. Sementara: cakgup.
   API_TOKEN: "cakgup"
