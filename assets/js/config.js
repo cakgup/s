@@ -8,8 +8,8 @@ window.CAKGUP_SHORTLINK_CONFIG = {
   SESSION_KEY: "cakgup_shortlink_logged_in",
   API_TOKEN_SESSION_KEY: "cakgup_shortlink_api_token",
   API_BASE_URL: "https://script.google.com/macros/s/AKfycby916I0dtuRqtYSv9U_foaY9KN8nK8_dK49-7ab8E7BC1y3zKwTnXE2ylslbubxlh6U1A/exec",
-  SHORTLINK_BASE_URL: "https://cakgup.github.io/link",
-  GUNUNGAN_SRC: "/link/assets/img/gunungan.png",
+  SHORTLINK_BASE_URL: "https://cakgup.github.io/s",
+  GUNUNGAN_SRC: "/s/assets/img/gunungan.png",
   REDIRECT_DELAY_MS: 900,
   FETCH_TIMEOUT_MS: 12000
 };
