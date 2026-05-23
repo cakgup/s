@@ -62,7 +62,7 @@ Fitur yang tersedia:
 Struktur utama source code:
 
 ```text
-link/
+s/
 ├── .nojekyll
 ├── index.html
 ├── 404.html
@@ -86,7 +86,7 @@ Penjelasan:
 | File/Folder | Keterangan |
 |---|---|
 | `index.html` | Halaman utama aplikasi |
-| `404.html` | Halaman fallback agar `/link/nama-link` tetap bisa diproses di GitHub Pages |
+| `404.html` | Halaman fallback agar `/s/nama-link` tetap bisa diproses di GitHub Pages |
 | `.nojekyll` | Agar GitHub Pages tidak memproses situs sebagai Jekyll |
 | `assets/css/style.css` | Pengaturan tampilan dan tema Majapahit |
 | `assets/img/gunungan.png` | Aset visual gunungan |
@@ -123,7 +123,7 @@ link
 Jika username GitHub Anda adalah `username`, maka alamat GitHub Pages nantinya dapat menjadi:
 
 ```text
-https://username.github.io/link/
+https://username.github.io/s/
 ```
 
 ### 5.2 Upload Source Code
@@ -209,7 +209,7 @@ const CONFIG = {
   SPREADSHEET_ID: "",
   SHEET_LINKS: "links",
   SHEET_LOGS: "click_logs",
-  BASE_SHORTLINK: "https://username.github.io/link",
+  BASE_SHORTLINK: "https://username.github.io/s",
   API_TOKEN: "CHANGE_ME_API_TOKEN"
 };
 ```
@@ -217,7 +217,7 @@ const CONFIG = {
 Ubah:
 
 ```javascript
-BASE_SHORTLINK: "https://username.github.io/link"
+BASE_SHORTLINK: "https://username.github.io/s"
 ```
 
 menjadi alamat GitHub Pages Anda.

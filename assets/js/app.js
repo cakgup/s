@@ -1,8 +1,8 @@
 (function () {
   const config = window.CAKGUP_SHORTLINK_CONFIG || {};
   const API_BASE_URL = config.API_BASE_URL || "https://script.google.com/macros/s/AKfycby916I0dtuRqtYSv9U_foaY9KN8nK8_dK49-7ab8E7BC1y3zKwTnXE2ylslbubxlh6U1A/exec";
-  const SHORTLINK_BASE_URL = (config.SHORTLINK_BASE_URL || "https://cakgup.github.io/link").replace(/\/$/, "");
-  const GUNUNGAN_SRC = config.GUNUNGAN_SRC || "/link/assets/img/gunungan.png";
+  const SHORTLINK_BASE_URL = (config.SHORTLINK_BASE_URL || "https://cakgup.github.io/s").replace(/\/$/, "");
+  const GUNUNGAN_SRC = config.GUNUNGAN_SRC || "/s/assets/img/gunungan.png";
   const REDIRECT_DELAY_MS = Number(config.REDIRECT_DELAY_MS || 900);
   const FETCH_TIMEOUT_MS = Number(config.FETCH_TIMEOUT_MS || 12000);
 
@@ -63,7 +63,7 @@
     // GitHub Pages project path: /link or /link/ adalah halaman utama, bukan slug.
     // Sebelumnya /link terbaca sebagai slug "link", sehingga muncul error
     // "Shortlink /link belum tersedia".
-    if (parts[0] === "link") {
+    if (parts[0] === "s") {
       const secondPart = parts[1] || "";
       if (!secondPart || secondPart === "index.html" || secondPart === "404.html") {
         return "";
