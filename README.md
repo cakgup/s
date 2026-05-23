@@ -3,7 +3,7 @@
 **CakGup Short Link** adalah aplikasi shortlink sederhana berbasis **GitHub Pages**, **Google Apps Script**, dan **Google Sheets**. Aplikasi ini dapat digunakan untuk membuat tautan pendek dengan format seperti:
 
 ```text
-https://username.github.io/link/nama-link
+https://username.github.io/s/nama-link
 ```
 
 Aplikasi ini dibuat agar mudah diduplikasi, dimodifikasi, dan digunakan oleh siapa pun, termasuk pengurus masjid, komunitas, sekolah, organisasi, atau pribadi yang membutuhkan layanan tautan pendek sederhana.
