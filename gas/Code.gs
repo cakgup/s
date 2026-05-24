@@ -6,7 +6,7 @@
  * doPost : create, update, disable shortlink
  *
  * Endpoint Web App aktif:
- * https://script.google.com/macros/s/AKfycby916I0dtuRqtYSv9U_foaY9KN8nK8_dK49-7ab8E7BC1y3zKwTnXE2ylslbubxlh6U1A/exec
+ * https://script.google.com/macros/s/SCRIPT_ID/exec
  *******************************************************/
 
 /**
@@ -18,15 +18,15 @@ const CONFIG = {
   // Jika Apps Script dibuat dari Google Sheet, boleh dikosongkan.
   // Jika Apps Script standalone, script akan otomatis membuat database spreadsheet baru
   // saat testSetup() dijalankan.
-  SPREADSHEET_ID: "",
+  SPREADSHEET_ID: "CEK_EXEL_ID",
 
   SHEET_LINKS: "links",
   SHEET_LOGS: "click_logs",
 
   BASE_SHORTLINK: "https://cakgup.github.io/s",
 
-  // Token untuk doPost. Sementara: cakgup.
-  API_TOKEN: "cakgup"
+  // Token untuk doPost. Sementara: ******.
+  API_TOKEN: "******"
 };
 
 const SCRIPT_PROPERTY_SPREADSHEET_ID = "CAKGUP_SHORTLINK_SPREADSHEET_ID";
