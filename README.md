@@ -1,67 +1,91 @@
 # CakGup Short Link
 
-**CakGup Short Link** adalah aplikasi shortlink sederhana berbasis **GitHub Pages**, **Google Apps Script**, dan **Google Sheets**. Aplikasi ini dapat digunakan untuk membuat tautan pendek.
+<p align="center">
+  <strong>Aplikasi shortlink sederhana, ringan, dan mudah diduplikasi</strong><br>
+  Dibangun dengan GitHub Pages, Google Apps Script, dan Google Sheets.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Frontend-GitHub%20Pages-222222?style=for-the-badge&logo=github" alt="GitHub Pages">
+  <img src="https://img.shields.io/badge/Backend-Google%20Apps%20Script-4285F4?style=for-the-badge&logo=google" alt="Google Apps Script">
+  <img src="https://img.shields.io/badge/Database-Google%20Sheets-34A853?style=for-the-badge&logo=googlesheets" alt="Google Sheets">
+  <img src="https://img.shields.io/badge/License-GPL--3.0-blue?style=for-the-badge" alt="GPL-3.0">
+</p>
+
+---
+
+## Tentang Aplikasi
+
+**CakGup Short Link** adalah aplikasi untuk membuat, menyimpan, menampilkan, dan mengelola tautan pendek secara sederhana tanpa server berbayar.
+
+Aplikasi ini cocok digunakan untuk:
+
+- tautan kegiatan komunitas;
+- tautan kajian, pendaftaran, formulir, dan publikasi;
+- tautan donasi atau informasi sosial;
+- tautan internal organisasi;
+- halaman daftar link publik sederhana;
+- pembelajaran integrasi GitHub Pages, Google Apps Script, dan Google Sheets.
 
 > Made with ❤️ by CakGup — didedikasikan untuk ummat.
 
 ---
 
-## 1. Gambaran Umum
+## Gambaran Arsitektur
 
-Aplikasi ini terdiri dari dua bagian utama:
+Aplikasi ini terdiri dari tiga komponen utama:
 
 | Komponen | Fungsi |
 |---|---|
-| GitHub Pages | Menampilkan halaman shortlink, daftar tautan publik, form tambah shortlink, dan redirect pengguna |
-| Google Apps Script | Menjadi API backend untuk menyimpan, mengambil, dan menonaktifkan shortlink |
-| Google Sheets | Menjadi database sederhana untuk menyimpan daftar shortlink dan log klik |
+| **GitHub Pages** | Menampilkan halaman utama, daftar shortlink, form tambah shortlink, dan proses redirect. |
+| **Google Apps Script** | Bertindak sebagai API/backend untuk membuat, membaca, menyelesaikan, dan menonaktifkan shortlink. |
+| **Google Sheets** | Menjadi database sederhana untuk menyimpan data link dan log klik. |
 
 Alur sederhananya:
 
 ```text
-Pengguna membuka /link/nama-link
+Pengguna membuka /s/nama-link
         ↓
 GitHub Pages membaca nama-link
         ↓
-GitHub Pages memanggil API Google Apps Script
+Frontend memanggil API Google Apps Script
         ↓
-Google Apps Script mencari data di Google Sheets
+Apps Script mencari data pada Google Sheets
         ↓
-Jika ditemukan, pengguna diarahkan ke target URL
+Jika ditemukan dan aktif, pengguna diarahkan ke URL tujuan
 ```
 
 ---
 
-## 2. Fitur Utama
+## Fitur Utama
 
-Fitur yang tersedia:
-
-1. Halaman shortlink berbasis GitHub Pages.
-2. Tema visual Majapahit dengan aset gunungan.
-3. Tampilan responsif untuk handphone.
-4. Password statis sederhana sebelum masuk halaman utama.
-5. Daftar tautan publik.
-6. Pencarian tautan berdasarkan judul, kategori, atau link name.
-7. Form tambah shortlink.
-8. Tombol buka tautan.
-9. Tombol salin shortlink.
-10. Tombol hapus/nonaktifkan shortlink.
-11. Log klik pada Google Sheets.
-12. API Google Apps Script untuk create, list, resolve, update, dan disable link.
+- Shortlink berbasis **GitHub Pages**.
+- Backend sederhana menggunakan **Google Apps Script**.
+- Database ringan menggunakan **Google Sheets**.
+- Tema visual **Majapahit** dengan aset gunungan.
+- Tampilan responsif untuk desktop dan handphone.
+- Halaman utama dengan password statis sederhana.
+- Daftar tautan publik.
+- Pencarian tautan berdasarkan judul, kategori, atau nama link.
+- Form tambah shortlink.
+- Tombol buka tautan.
+- Tombol salin shortlink.
+- Tombol hapus/nonaktifkan shortlink.
+- Log klik pada Google Sheets.
+- API untuk `create`, `list`, `resolve`, `update`, dan `disable` link.
+- Dapat diduplikasi dan dimodifikasi untuk kebutuhan pribadi, komunitas, masjid, pendidikan, atau kegiatan sosial.
 
 ---
 
-## 3. Struktur Folder
-
-Struktur utama source code:
+## Struktur Repository
 
 ```text
-link/
+s/
 ├── .nojekyll
-├── index.html
 ├── 404.html
+├── LICENSE
 ├── README.md
-├── Kode.gs
+├── index.html
 ├── assets/
 │   ├── css/
 │   │   └── style.css
@@ -75,76 +99,78 @@ link/
     └── Code.gs
 ```
 
-Penjelasan:
+Penjelasan file utama:
 
 | File/Folder | Keterangan |
 |---|---|
-| `index.html` | Halaman utama aplikasi |
-| `404.html` | Halaman fallback agar `/s/nama-link` tetap bisa diproses di GitHub Pages |
-| `.nojekyll` | Agar GitHub Pages tidak memproses situs sebagai Jekyll |
-| `assets/css/style.css` | Pengaturan tampilan dan tema Majapahit |
-| `assets/img/gunungan.png` | Aset visual gunungan |
-| `assets/js/config.js` | Konfigurasi endpoint API |
-| `assets/js/auth.js` | Logika password statis halaman utama |
-| `assets/js/app.js` | Logika redirect, daftar link, tambah link, salin, dan hapus |
-| `Kode.gs` | Kode Google Apps Script untuk disalin langsung |
-| `gas/Code.gs` | Salinan kode Apps Script dalam folder terpisah |
+| `index.html` | Halaman utama aplikasi. |
+| `404.html` | Fallback routing agar URL seperti `/s/nama-link` tetap dapat diproses oleh JavaScript. |
+| `.nojekyll` | Mencegah GitHub Pages memproses repo sebagai Jekyll. |
+| `assets/css/style.css` | Pengaturan tampilan, layout, warna, dan tema visual. |
+| `assets/img/gunungan.png` | Aset visual tema Majapahit. |
+| `assets/js/config.js` | Konfigurasi endpoint API Google Apps Script. |
+| `assets/js/auth.js` | Logika password statis pada halaman utama. |
+| `assets/js/app.js` | Logika aplikasi: daftar link, redirect, tambah link, salin, pencarian, dan hapus. |
+| `gas/Code.gs` | Kode backend Google Apps Script. |
+| `LICENSE` | Lisensi penggunaan source code. |
 
 ---
 
-## 4. Persiapan
+## Kebutuhan Awal
 
 Sebelum menggunakan aplikasi, siapkan:
 
-1. Akun GitHub.
-2. Repository GitHub, misalnya `link`.
-3. Akun Google.
-4. Google Apps Script.
-5. Google Sheets sebagai database, atau biarkan Apps Script membuat database otomatis.
+1. akun GitHub;
+2. repository GitHub;
+3. akun Google;
+4. Google Apps Script;
+5. Google Sheets sebagai database;
+6. browser modern seperti Chrome, Edge, Safari, atau Firefox.
 
 ---
 
-## 5. Instalasi di GitHub Pages
+## Cara Duplikasi Repository
 
-### 5.1 Buat Repository
+### 1. Fork Repository
 
-Buat repository baru di GitHub, misalnya:
-
-```text
-link
-```
-
-Jika username GitHub Anda adalah `username`, maka alamat GitHub Pages nantinya dapat menjadi:
+Buka repository ini, lalu klik:
 
 ```text
-https://username.github.io/link/
+Fork
 ```
 
-### 5.2 Upload Source Code
+Setelah itu, repository akan tersalin ke akun GitHub Anda.
 
-Upload semua file source ke repository tersebut.
+### 2. Clone ke Komputer Lokal
 
-Pastikan struktur file di repository seperti ini:
+```bash
+git clone https://github.com/username/s.git
+cd s
+```
+
+Ganti `username` dengan username GitHub Anda.
+
+### 3. Ubah Konfigurasi
+
+File yang biasanya perlu disesuaikan:
 
 ```text
-index.html
-404.html
-.nojekyll
-assets/
-gas/
-Kode.gs
-README.md
+assets/js/config.js
+assets/js/auth.js
+gas/Code.gs
 ```
 
-### 5.3 Aktifkan GitHub Pages
+---
 
-Masuk ke:
+## Cara Deploy ke GitHub Pages
+
+Masuk ke halaman repository Anda, lalu buka:
 
 ```text
 Settings → Pages
 ```
 
-Lalu gunakan pengaturan:
+Gunakan konfigurasi berikut:
 
 ```text
 Source : Deploy from a branch
@@ -152,19 +178,17 @@ Branch : main
 Folder : /root
 ```
 
-Simpan pengaturan tersebut.
-
-Setelah aktif, buka:
+Setelah tersimpan, GitHub Pages akan membuat alamat seperti:
 
 ```text
-https://username.github.io/link/
+https://username.github.io/s/
 ```
 
 ---
 
-## 6. Konfigurasi Google Apps Script
+## Konfigurasi Google Apps Script
 
-### 6.1 Buat Project Apps Script
+### 1. Buat Project Apps Script
 
 Buka:
 
@@ -175,35 +199,29 @@ https://script.google.com
 Buat project baru, misalnya:
 
 ```text
-shortlink
+CakGup Short Link API
 ```
 
-### 6.2 Salin Kode Apps Script
+### 2. Salin Kode Backend
 
 Buka file:
-
-```text
-Kode.gs
-```
-
-atau:
 
 ```text
 gas/Code.gs
 ```
 
-Salin seluruh isinya ke editor Apps Script.
+Salin seluruh isinya ke editor Google Apps Script.
 
-### 6.3 Ubah Konfigurasi Token
+### 3. Sesuaikan Konfigurasi
 
-Di bagian atas `Kode.gs`, cari konfigurasi berikut:
+Pada bagian konfigurasi Apps Script, sesuaikan nilai berikut:
 
 ```javascript
 const CONFIG = {
   SPREADSHEET_ID: "",
   SHEET_LINKS: "links",
   SHEET_LOGS: "click_logs",
-  BASE_SHORTLINK: "https://username.github.io/link",
+  BASE_SHORTLINK: "https://username.github.io/s",
   API_TOKEN: "CHANGE_ME_API_TOKEN"
 };
 ```
@@ -211,12 +229,12 @@ const CONFIG = {
 Ubah:
 
 ```javascript
-BASE_SHORTLINK: "https://username.github.io/link"
+BASE_SHORTLINK: "https://username.github.io/s"
 ```
 
-menjadi alamat GitHub Pages Anda.
+menjadi alamat GitHub Pages milik Anda.
 
-Ubah:
+Ubah juga:
 
 ```javascript
 API_TOKEN: "CHANGE_ME_API_TOKEN"
@@ -225,16 +243,16 @@ API_TOKEN: "CHANGE_ME_API_TOKEN"
 menjadi token pribadi yang kuat, misalnya:
 
 ```javascript
-API_TOKEN: "token-panjang-acak-yang-anda-buat-sendiri"
+API_TOKEN: "token-panjang-acak-yang-sulit-ditebak"
 ```
 
-Jangan gunakan token yang mudah ditebak untuk penggunaan produksi.
+> Jangan gunakan token pendek seperti `admin`, `123456`, atau `password`.
 
 ---
 
-## 7. Menyiapkan Database Google Sheets
+## Menyiapkan Google Sheets sebagai Database
 
-Ada dua pilihan.
+Terdapat dua pilihan.
 
 ### Pilihan A — Otomatis
 
@@ -244,38 +262,34 @@ Biarkan:
 SPREADSHEET_ID: ""
 ```
 
-Lalu jalankan fungsi:
+Lalu jalankan fungsi berikut dari Google Apps Script:
 
 ```javascript
 testSetup
 ```
 
-Apps Script akan otomatis membuat file Google Sheets baru sebagai database.
+Apps Script akan membuat file Google Sheets baru sebagai database.
 
-Setelah berhasil, hasil eksekusi akan menampilkan `spreadsheet_url`. Buka URL tersebut untuk melihat database.
+### Pilihan B — Manual
 
-### Pilihan B — Menggunakan Google Sheets Sendiri
+Buat Google Sheets baru, lalu ambil Spreadsheet ID dari URL.
 
-Buat Google Sheets baru secara manual.
-
-Ambil Spreadsheet ID dari URL.
-
-Contoh URL Google Sheets:
+Contoh URL:
 
 ```text
-https://docs.google.com/spreadsheets/d/abcd/edit
+https://docs.google.com/spreadsheets/d/abcd1234/edit
 ```
 
 Spreadsheet ID-nya adalah:
 
 ```text
-abcd
+abcd1234
 ```
 
-Lalu isi pada konfigurasi:
+Masukkan ke konfigurasi:
 
 ```javascript
-SPREADSHEET_ID: "abcd"
+SPREADSHEET_ID: "abcd1234"
 ```
 
 Kemudian jalankan:
@@ -284,7 +298,7 @@ Kemudian jalankan:
 testSetup
 ```
 
-Script akan membuat sheet:
+Script akan menyiapkan sheet:
 
 ```text
 links
@@ -293,9 +307,9 @@ click_logs
 
 ---
 
-## 8. Deploy Google Apps Script sebagai Web App
+## Deploy Google Apps Script sebagai Web App
 
-Klik:
+Pada Google Apps Script, klik:
 
 ```text
 Deploy → New deployment
@@ -304,24 +318,22 @@ Deploy → New deployment
 Pilih:
 
 ```text
-Type        : Web app
-Execute as  : Me
-Access      : Anyone
+Type       : Web app
+Execute as : Me
+Access     : Anyone
 ```
 
-Klik **Deploy**.
+Klik **Deploy**, lalu salin URL Web App yang dihasilkan.
 
-Setelah itu, salin URL Web App. Bentuknya seperti:
+Contoh:
 
 ```text
 https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec
 ```
 
-Jangan bagikan Script ID aktif atau token API Anda secara publik apabila repository akan digunakan orang lain.
-
 ---
 
-## 9. Konfigurasi Frontend
+## Konfigurasi Frontend
 
 Buka file:
 
@@ -329,31 +341,19 @@ Buka file:
 assets/js/config.js
 ```
 
-Cari bagian endpoint API:
+Cari konfigurasi endpoint API, lalu sesuaikan dengan URL Web App Google Apps Script Anda:
 
 ```javascript
 API_BASE_URL: "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"
 ```
 
-Ganti dengan URL Web App milik Anda:
-
-```javascript
-API_BASE_URL: "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec"
-```
-
-Gunakan URL Web App dari deployment Apps Script Anda.
-
-### Catatan Keamanan
-
-Jangan menyimpan token API pada `config.js`.
-
-Token API hanya dimasukkan saat menggunakan form tambah/hapus shortlink dan hanya disimpan sementara di browser session.
+Simpan, lalu commit dan push perubahan ke GitHub.
 
 ---
 
-## 10. Konfigurasi Password Halaman Utama
+## Konfigurasi Password Halaman Utama
 
-Aplikasi ini menggunakan password statis sederhana di sisi frontend.
+Aplikasi ini memakai password statis sederhana di sisi frontend.
 
 Buka:
 
@@ -369,130 +369,92 @@ const STATIC_PASSWORD = "CHANGE_ME_PASSWORD";
 
 Ganti dengan password yang Anda inginkan.
 
-Contoh:
-
-```javascript
-const STATIC_PASSWORD = "password-akses-saya";
-```
-
-### Catatan Penting
-
-Password statis di GitHub Pages bukan keamanan kuat karena source JavaScript dapat dilihat oleh pengguna teknis.
-
-Fitur ini hanya berfungsi sebagai pembatas ringan agar halaman utama tidak langsung terbuka untuk umum.
+> Catatan penting: password statis pada GitHub Pages bukan mekanisme keamanan kuat, karena source JavaScript tetap dapat dilihat oleh pengguna teknis. Gunakan fitur ini hanya sebagai pembatas ringan.
 
 ---
 
-## 11. Cara Menambahkan Shortlink
+## Cara Menggunakan Aplikasi
 
-Buka halaman utama:
+### 1. Membuka Halaman Utama
 
-```text
-https://username.github.io/link/
-```
-
-Masukkan password halaman utama.
-
-Klik:
+Buka alamat GitHub Pages:
 
 ```text
-Tambah Shortlink
+https://username.github.io/s/
 ```
 
-Isi form:
+Masukkan password halaman utama apabila diminta.
 
-| Field | Isi |
+### 2. Menambahkan Shortlink
+
+Klik tombol tambah shortlink, lalu isi form:
+
+| Field | Contoh Isi |
 |---|---|
-| API Token | Token yang sama dengan `API_TOKEN` di Apps Script |
-| Link Name | Nama pendek link, misalnya `donasi` |
-| Target URL | URL tujuan lengkap, misalnya `https://example.com/donasi` |
-| Judul | Judul tautan |
-| Deskripsi | Deskripsi singkat |
-| Kategori | Kategori tautan |
-| Tampilkan di halaman utama | Centang jika ingin tampil di daftar publik |
+| API Token | Token yang sama dengan `API_TOKEN` di Apps Script. |
+| Link Name | `donasi`, `kajian`, `formulir`, `daftar` |
+| Target URL | `https://example.com/formulir` |
+| Judul | `Formulir Pendaftaran Kajian` |
+| Deskripsi | `Link pendaftaran peserta kajian pekanan.` |
+| Kategori | `kajian`, `donasi`, `pendidikan`, `internal` |
+| Public | Centang jika ingin tampil pada halaman utama. |
 
-Klik:
+Klik **Simpan Shortlink**.
 
-```text
-Simpan Shortlink
-```
+### 3. Mengakses Shortlink
 
-Jika berhasil, shortlink dapat diakses melalui:
+Jika `link_name` adalah:
 
 ```text
-https://username.github.io/link/donasi
+donasi
 ```
+
+maka shortlink dapat diakses melalui:
+
+```text
+https://username.github.io/s/donasi
+```
+
+### 4. Menyalin Shortlink
+
+Pada daftar link, klik tombol **Salin** untuk menyalin tautan pendek ke clipboard.
+
+### 5. Menonaktifkan Shortlink
+
+Klik tombol **Hapus** pada daftar link. Data tidak langsung dihapus permanen, tetapi statusnya diubah menjadi nonaktif.
 
 ---
 
-## 12. Cara Menghapus Shortlink
+## Format Data Google Sheets
 
-Pada daftar tautan publik, klik tombol:
-
-```text
-Hapus
-```
-
-Sistem akan meminta konfirmasi.
-
-Jika disetujui, data di Google Sheets tidak dihapus permanen, tetapi statusnya diubah menjadi:
-
-```text
-nonaktif
-```
-
-Dengan demikian, tautan tidak tampil lagi di halaman utama dan tidak bisa digunakan untuk redirect.
-
----
-
-## 13. Cara Mengedit Data Shortlink Manual
-
-Buka Google Sheets database.
-
-Pada sheet:
-
-```text
-links
-```
-
-Anda dapat mengubah:
+Sheet `links` umumnya berisi data seperti:
 
 | Kolom | Keterangan |
 |---|---|
-| `link_name` | Nama shortlink |
-| `target_url` | URL tujuan |
-| `title` | Judul |
-| `description` | Deskripsi |
-| `category` | Kategori |
-| `public` | `TRUE` atau `FALSE` |
-| `status` | `aktif` atau `nonaktif` |
+| `id` | ID unik link. |
+| `link_name` | Nama pendek yang dipakai pada URL. |
+| `target_url` | URL tujuan asli. |
+| `title` | Judul link. |
+| `description` | Deskripsi singkat. |
+| `category` | Kategori link. |
+| `public` | `TRUE` atau `FALSE`. |
+| `status` | `aktif` atau `nonaktif`. |
+| `created_at` | Waktu pembuatan. |
+| `created_by` | Pembuat link. |
 
-Jika ingin menyembunyikan link dari halaman utama tetapi tetap bisa digunakan, isi:
-
-```text
-public = FALSE
-status = aktif
-```
-
-Jika ingin menonaktifkan link:
-
-```text
-status = nonaktif
-```
+Sheet `click_logs` menyimpan catatan akses/klik untuk kebutuhan monitoring sederhana.
 
 ---
 
-## 14. Cara Uji API
+## Contoh Uji API
 
-### 14.1 Ping API
-
-Buka:
+### Ping API
 
 ```text
 https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?action=ping
 ```
 
-Hasil yang diharapkan:
+Respons yang diharapkan:
 
 ```json
 {
@@ -501,27 +463,19 @@ Hasil yang diharapkan:
 }
 ```
 
-### 14.2 Ambil Daftar Link Publik
-
-Buka:
+### Ambil Daftar Link Publik
 
 ```text
 https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?action=list
 ```
 
-### 14.3 Resolve Shortlink
-
-Buka:
+### Resolve Shortlink
 
 ```text
 https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec?link_name=donasi
 ```
 
-Hasil sukses berisi `target_url`.
-
-### 14.4 Tambah Shortlink melalui API
-
-Contoh request `POST`:
+### Tambah Shortlink via API
 
 ```json
 {
@@ -539,141 +493,74 @@ Contoh request `POST`:
 
 ---
 
-## 15. Cara Modifikasi Tampilan
+## Tips Modifikasi Tampilan
 
-### 15.1 Mengubah Warna
-
-Buka:
+Untuk mengubah warna, font, ukuran kartu, tombol, atau layout, buka:
 
 ```text
 assets/css/style.css
 ```
 
-Cari bagian `:root`, misalnya:
-
-```css
-:root {
-  --bg-dark: #0E0905;
-  --gold: #D4AF37;
-  --cream: #F5EDD8;
-}
-```
-
-Ubah warna sesuai kebutuhan.
-
-### 15.2 Mengubah Logo/Gunungan
-
-Ganti file:
+Untuk mengganti gambar tema, ubah file pada:
 
 ```text
-assets/img/gunungan.png
+assets/img/
 ```
 
-dengan gambar lain menggunakan nama file yang sama.
-
-Jika nama file berbeda, sesuaikan path gambar pada `index.html` dan `404.html`.
-
-### 15.3 Mengubah Judul Halaman
-
-Buka:
-
-```text
-index.html
-404.html
-```
-
-Ubah teks seperti:
-
-```text
-Short Link
-Made with love by ...
-```
-
-sesuai kebutuhan.
-
-### 15.4 Mengubah Layout Kartu Link
-
-Buka:
+Untuk mengubah teks, label tombol, atau perilaku frontend, sesuaikan:
 
 ```text
 assets/js/app.js
+index.html
 ```
-
-Cari fungsi yang menampilkan daftar link publik, lalu sesuaikan struktur HTML kartu.
 
 ---
 
-## 16. Cara Menggunakan untuk Masjid/Komunitas Lain
+## Catatan Keamanan
 
-Untuk menduplikasi aplikasi ini:
+Aplikasi ini dibuat agar sederhana dan mudah dipelajari. Namun, ada beberapa hal penting yang perlu diperhatikan:
 
-1. Fork atau download source code.
-2. Buat repository GitHub Pages baru.
-3. Buat Apps Script baru.
-4. Buat token API sendiri.
-5. Deploy Apps Script sebagai Web App.
-6. Masukkan endpoint Web App ke `assets/js/config.js`.
-7. Ubah `BASE_SHORTLINK` pada `Kode.gs`.
-8. Ubah tema, logo, dan teks sesuai nama masjid/komunitas.
-9. Upload ke GitHub Pages.
-10. Gunakan untuk membuat shortlink.
+- Jangan menggunakan token API yang mudah ditebak.
+- Jangan menyimpan rahasia penting di frontend.
+- Password statis pada JavaScript hanya pembatas ringan, bukan autentikasi kuat.
+- Jangan gunakan aplikasi ini untuk tautan phishing, malware, penipuan, spam, atau konten ilegal.
+- Untuk kebutuhan produksi serius, pertimbangkan backend dengan autentikasi yang lebih kuat.
+- Periksa secara berkala isi Google Sheets agar tidak ada tautan yang disalahgunakan.
 
-Contoh penggunaan:
+---
+
+## Troubleshooting
+
+### Halaman GitHub Pages belum muncul
+
+Cek pengaturan:
 
 ```text
-https://namamasjid.github.io/link/kas-jumat
-https://namamasjid.github.io/link/donasi
-https://namamasjid.github.io/link/kajian
-https://namamasjid.github.io/link/laporan
+Settings → Pages
 ```
 
----
+Pastikan branch dan folder sudah benar.
 
-## 17. Keamanan
+### Shortlink tidak redirect
 
-Hal-hal yang perlu diperhatikan:
+Periksa:
 
-1. Jangan menyimpan data rahasia di Google Sheets.
-2. Jangan membagikan token API.
-3. Jangan membagikan Script ID aktif jika tidak diperlukan.
-4. Gunakan token API yang panjang dan sulit ditebak.
-5. Password statis di frontend bukan autentikasi kuat.
-6. Google Apps Script Web App dengan akses `Anyone` dapat diakses publik, sehingga validasi token pada `doPost` wajib digunakan.
-7. Jika source code ingin dibagikan, gunakan placeholder:
-   - `YOUR_SCRIPT_ID`
-   - `CHANGE_ME_API_TOKEN`
-   - `CHANGE_ME_PASSWORD`
-   - `YOUR_SPREADSHEET_ID`
-8. Jangan commit file yang berisi kredensial asli ke repository publik.
+- URL Google Apps Script pada `assets/js/config.js`;
+- deployment Apps Script sudah aktif;
+- `link_name` ada di sheet `links`;
+- status link masih `aktif`;
+- file `404.html` tersedia di root repository.
 
----
+### Token tidak valid
 
-## 18. Troubleshooting
+Periksa:
 
-### 18.1 Shortlink Tidak Redirect
+- token yang diinput sama dengan `API_TOKEN` di `gas/Code.gs`;
+- Apps Script sudah disimpan;
+- Apps Script sudah di-deploy ulang setelah perubahan;
+- browser tidak memakai cache lama.
 
-Cek:
-
-1. `link_name` benar.
-2. `status` pada Google Sheets bernilai `aktif`.
-3. `target_url` diawali `http://` atau `https://`.
-4. Endpoint di `assets/js/config.js` sudah benar.
-5. Apps Script sudah di-deploy sebagai versi baru.
-
-### 18.2 Muncul Pesan Token Tidak Valid
-
-Cek:
-
-1. Token yang diinput sama dengan `API_TOKEN` di `Kode.gs`.
-2. Apps Script sudah di-save.
-3. Apps Script sudah di-deploy ulang sebagai versi baru.
-4. Browser tidak menggunakan cache lama.
-
-### 18.3 URL Valid tetapi Dianggap Tidak Valid
-
-Pastikan menggunakan versi `Kode.gs` terbaru yang memiliki fungsi validasi URL longgar dan kompatibel dengan Google Docs/Sheets.
-
-### 18.4 Perubahan Frontend Tidak Muncul
+### Perubahan tampilan tidak muncul
 
 Lakukan hard refresh:
 
@@ -681,37 +568,45 @@ Lakukan hard refresh:
 Ctrl + F5
 ```
 
-Atau buka dengan cache buster:
+Atau tambahkan query cache buster:
 
 ```text
-https://username.github.io/link/?v=2
+https://username.github.io/s/?v=2
 ```
-
-### 18.5 Halaman `/link/nama-link` Tidak Terbuka
-
-Pastikan file berikut ada:
-
-```text
-404.html
-.nojekyll
-```
-
-GitHub Pages membutuhkan `404.html` agar routing statis seperti `/link/nama-link` tetap dapat diproses oleh JavaScript.
 
 ---
 
-## 19. Lisensi dan Penggunaan
+## Rekomendasi Pengembangan Lanjutan
 
-Source ini boleh digunakan, dimodifikasi, dan disesuaikan untuk kebutuhan pribadi, masjid, komunitas, pendidikan, atau kegiatan sosial.
+Beberapa ide pengembangan:
 
-Gunakan dengan bijak. Jangan digunakan untuk menyebarkan tautan berbahaya, phishing, penipuan, atau konten yang melanggar hukum.
+- login admin berbasis Google OAuth;
+- dashboard statistik klik;
+- QR Code otomatis untuk setiap shortlink;
+- kategori link yang lebih rapi;
+- ekspor laporan klik ke CSV/Excel;
+- validasi domain tujuan;
+- custom alias dengan aturan tertentu;
+- halaman publik per kategori;
+- integrasi notifikasi Telegram atau WhatsApp.
 
 ---
 
-## 20. Penutup
+## Lisensi
 
-Aplikasi ini dibuat sederhana agar mudah dipelajari, digunakan, dan dikembangkan kembali.
+Repository ini menggunakan lisensi **GPL-3.0**.
 
-Semoga bermanfaat untuk memudahkan pengelolaan tautan digital, publikasi kegiatan, laporan, donasi, kajian, dan kebutuhan informasi lainnya.
+Anda dapat menggunakan, mempelajari, memodifikasi, dan mendistribusikan ulang source code ini dengan tetap memperhatikan ketentuan lisensi yang berlaku.
 
-**Made with ❤️ by CakGup — didedikasikan untuk ummat.**
+---
+
+## Dedikasi
+
+Aplikasi ini didedikasikan untuk **ummat** sebagai ikhtiar kecil dalam memudahkan pengelolaan tautan digital untuk kegiatan dakwah, pendidikan, sosial, kemanusiaan, komunitas, dan kebaikan lainnya.
+
+Semoga aplikasi ini menjadi jalan manfaat, memudahkan urusan banyak orang, dan menjadi amal jariyah bagi siapa pun yang mengembangkan serta menggunakannya untuk kebaikan.
+
+<p align="center">
+  <strong>Made with ❤️ by CakGup</strong><br>
+  <em>Didedikasikan untuk ummat.</em>
+</p>
