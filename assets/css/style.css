@@ -1,15 +1,17 @@
 :root {
-  --bg-dark: #0e0905;
-  --bg-deeper: #060403;
-  --sogan: #3b2415;
-  --sogan-soft: #5f3920;
-  --gold: #d4af37;
-  --gold-bright: #f5c542;
+  --primary: #1A3A6B;
+  --accent: #FFCA1A;
+  --bg-dark: var(--primary);
+  --bg-deeper: #081a33;
+  --sogan: var(--primary);
+  --sogan-soft: #25528f;
+  --gold: var(--accent);
+  --gold-bright: #ffd84d;
   --cream: #f5edd8;
   --cream-light: #fff7df;
-  --brick: #8b2f1c;
-  --text-dark: #2b160a;
-  --text-muted: rgba(43, 22, 10, 0.72);
+  --brick: var(--primary);
+  --text-dark: #10213d;
+  --text-muted: rgba(16, 33, 61, 0.72);
   --shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
 }
 
@@ -29,10 +31,10 @@ body {
   font-family: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--cream-light);
   background:
-    radial-gradient(circle at 50% 0%, rgba(245, 197, 66, 0.18), transparent 32%),
-    radial-gradient(circle at 0% 80%, rgba(139, 47, 28, 0.22), transparent 34%),
-    radial-gradient(circle at 100% 70%, rgba(212, 175, 55, 0.12), transparent 30%),
-    linear-gradient(180deg, #1b1008 0%, #0e0905 56%, #060403 100%);
+    radial-gradient(circle at 50% 0%, rgba(255, 202, 26, 0.22), transparent 32%),
+    radial-gradient(circle at 0% 80%, rgba(26, 58, 107, 0.36), transparent 34%),
+    radial-gradient(circle at 100% 70%, rgba(255, 202, 26, 0.14), transparent 30%),
+    linear-gradient(180deg, #25528f 0%, var(--primary) 56%, var(--bg-deeper) 100%);
 }
 
 a {
@@ -66,7 +68,7 @@ button {
   border-radius: clamp(26px, 7vw, 42px);
   padding: clamp(18px, 5vw, 30px);
   background:
-    linear-gradient(180deg, rgba(59, 36, 21, 0.88), rgba(14, 9, 5, 0.94));
+    linear-gradient(180deg, rgba(26, 58, 107, 0.94), rgba(8, 26, 51, 0.96));
   box-shadow: var(--shadow), inset 0 0 0 1px rgba(255, 247, 223, 0.06);
   overflow: hidden;
 }
@@ -108,7 +110,7 @@ button {
   height: 160px;
   left: -60px;
   bottom: 14%;
-  background: rgba(139, 47, 28, 0.2);
+  background: rgba(37, 82, 143, 0.28);
 }
 
 .brand-header,
@@ -139,7 +141,7 @@ button {
   border: 1px solid rgba(212, 175, 55, 0.34);
   border-radius: 999px;
   color: var(--gold-bright);
-  background: rgba(14, 9, 5, 0.36);
+  background: rgba(8, 26, 51, 0.42);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -237,7 +239,7 @@ button {
 .label {
   display: block;
   margin: 0 0 8px;
-  color: rgba(43, 22, 10, 0.84);
+  color: rgba(16, 33, 61, 0.84);
   font-size: 13px;
   font-weight: 800;
 }
@@ -245,7 +247,7 @@ button {
 .input,
 .textarea {
   width: 100%;
-  border: 1px solid rgba(59, 36, 21, 0.22);
+  border: 1px solid rgba(26, 58, 107, 0.22);
   border-radius: 16px;
   padding: 0 16px;
   color: var(--text-dark);
@@ -286,7 +288,7 @@ button {
   right: 6px;
   border: 0;
   border-radius: 12px;
-  background: rgba(59, 36, 21, 0.08);
+  background: rgba(26, 58, 107, 0.08);
   cursor: pointer;
 }
 
@@ -311,7 +313,7 @@ button {
 }
 
 .button-primary {
-  color: #2b160a;
+  color: var(--text-dark);
   background: linear-gradient(180deg, var(--gold-bright), var(--gold));
   box-shadow: 0 10px 24px rgba(212, 175, 55, 0.26);
 }
@@ -319,9 +321,9 @@ button {
 .button-secondary {
   margin-top: 14px;
   color: var(--cream-light);
-  background: linear-gradient(180deg, #7a2c1a, #58200f);
+  background: linear-gradient(180deg, var(--sogan-soft), var(--primary));
   border: 1px solid rgba(245, 197, 66, 0.28);
-  box-shadow: 0 10px 22px rgba(88, 32, 15, 0.25);
+  box-shadow: 0 10px 22px rgba(26, 58, 107, 0.25);
 }
 
 .button-small {
@@ -337,15 +339,15 @@ button {
   border-radius: 999px;
   padding: 0 14px;
   color: var(--gold-bright);
-  background: rgba(14, 9, 5, 0.38);
+  background: rgba(8, 26, 51, 0.42);
   font-size: 13px;
   font-weight: 800;
 }
 
 .danger-button {
   color: var(--cream-light);
-  border-color: rgba(139, 47, 28, 0.55);
-  background: linear-gradient(180deg, #9b2f1c, #642011);
+  border-color: rgba(255, 95, 109, 0.55);
+  background: linear-gradient(180deg, #d93f5d, #9b1c3d);
 }
 
 .danger-button:disabled {
@@ -458,7 +460,7 @@ button {
   padding: 5px 9px;
   color: var(--brick);
   background: rgba(212, 175, 55, 0.13);
-  border-color: rgba(139, 47, 28, 0.18);
+  border-color: rgba(26, 58, 107, 0.18);
   font-size: 10px;
   font-weight: 900;
 }
@@ -523,7 +525,7 @@ button {
   width: 54px;
   height: 54px;
   margin: 4px auto 16px;
-  border: 5px solid rgba(59, 36, 21, 0.14);
+  border: 5px solid rgba(26, 58, 107, 0.14);
   border-top-color: var(--gold);
   border-radius: 999px;
   animation: spin .9s linear infinite;
