@@ -87,7 +87,7 @@ function doGet(e) {
     }
 
     if (action === "list") {
-      return jsonOutput(listPublicLinks());
+      return jsonOutput(listPublicLinks(params));
     }
 
     if (!linkName) {
@@ -237,7 +237,7 @@ function createShortlink(body) {
       message: "Shortlink berhasil dibuat",
       id: id,
       link_name: linkName,
-      shortlink: buildShortlink(linkName),
+      shortlink: buildShortlink(linkName, body),
       target_url: targetUrl
     };
 
@@ -307,7 +307,7 @@ function updateShortlink(body) {
       success: true,
       message: "Shortlink berhasil diperbarui",
       link_name: linkName,
-      shortlink: buildShortlink(linkName),
+      shortlink: buildShortlink(linkName, body),
       target_url: targetUrl
     };
 
@@ -415,7 +415,7 @@ function resolveShortlink(linkName, e) {
     title: data.title,
     description: data.description,
     category: data.category,
-    shortlink: buildShortlink(data.link_name)
+    shortlink: buildShortlink(data.link_name, e && e.parameter ? e.parameter : {})
   };
 }
 
@@ -424,7 +424,7 @@ function resolveShortlink(linkName, e) {
  * LIST PUBLIC LINKS
  * =========================
  */
-function listPublicLinks() {
+function listPublicLinks(params) {
   const rows = getAllLinkObjects();
 
   const data = rows
@@ -438,7 +438,7 @@ function listPublicLinks() {
         title: item.title,
         description: item.description,
         category: item.category,
-        shortlink: buildShortlink(item.link_name)
+        shortlink: buildShortlink(item.link_name, params)
       };
     });
 
@@ -744,8 +744,19 @@ function generateId() {
   return "SL-" + Utilities.getUuid().slice(0, 8).toUpperCase();
 }
 
-function buildShortlink(linkName) {
-  return CONFIG.BASE_SHORTLINK.replace(/\/$/, "") + "/" + linkName;
+function getBaseShortlink(source) {
+  source = source || {};
+  const baseUrl = String(source.shortlink_base_url || source.base_shortlink || source.base_url || "").trim();
+
+  if (/^https?:\/\/[^\s]+$/i.test(baseUrl)) {
+    return baseUrl.replace(/\/$/, "");
+  }
+
+  return CONFIG.BASE_SHORTLINK.replace(/\/$/, "");
+}
+
+function buildShortlink(linkName, source) {
+  return getBaseShortlink(source) + "/" + linkName;
 }
 
 function generateSlugFromUrl(url) {

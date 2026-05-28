@@ -1,7 +1,9 @@
 (function () {
   const config = window.CAKGUP_SHORTLINK_CONFIG || {};
+  const DEFAULT_APP_BASE_URL = new URL("../..", document.currentScript.src).href.replace(/\/$/, "");
   const API_BASE_URL = config.API_BASE_URL || "https://script.google.com/macros/s/AKfycby916I0dtuRqtYSv9U_foaY9KN8nK8_dK49-7ab8E7BC1y3zKwTnXE2ylslbubxlh6U1A/exec";
-  const SHORTLINK_BASE_URL = (config.SHORTLINK_BASE_URL || "https://cakgup.github.io/s").replace(/\/$/, "");
+  const SHORTLINK_BASE_URL = (config.SHORTLINK_BASE_URL || DEFAULT_APP_BASE_URL).replace(/\/$/, "");
+  const APP_BASE_PATH = new URL(SHORTLINK_BASE_URL).pathname.replace(/\/$/, "");
   const GUNUNGAN_SRC = config.GUNUNGAN_SRC || new URL("../img/gunungan.png", document.currentScript.src).href;
   const REDIRECT_DELAY_MS = Number(config.REDIRECT_DELAY_MS || 900);
   const FETCH_TIMEOUT_MS = Number(config.FETCH_TIMEOUT_MS || 12000);
@@ -57,26 +59,14 @@
     const querySlug = query.get("link_name") || query.get("slug");
     if (querySlug) return normalizeSlug(querySlug);
 
-    const path = window.location.pathname.replace(/\/+/g, "/");
-    const parts = path.split("/").filter(Boolean);
-
-    // GitHub Pages project path: /s or /s/ adalah halaman utama, bukan slug.
-    // Sebelumnya /link terbaca sebagai slug "link", sehingga muncul error
-    // "Shortlink /link belum tersedia".
-    if (parts[0] === "s") {
-      const secondPart = parts[1] || "";
-      if (!secondPart || secondPart === "index.html" || secondPart === "404.html") {
-        return "";
-      }
-      return normalizeSlug(secondPart);
+    let path = window.location.pathname.replace(/\/+/g, "/").replace(/\/$/, "");
+    if (APP_BASE_PATH && path.toLowerCase().startsWith(APP_BASE_PATH.toLowerCase())) {
+      path = path.slice(APP_BASE_PATH.length) || "/";
     }
 
-    // Local testing: /[slug]
-    if (parts.length === 1 && parts[0] !== "index.html" && parts[0] !== "404.html") {
-      return normalizeSlug(parts[0]);
-    }
-
-    return "";
+    const slug = path.split("/").filter(Boolean)[0] || "";
+    if (!slug || slug === "index.html" || slug === "404.html") return "";
+    return normalizeSlug(slug);
   }
 
   function normalizeSlug(value) {
@@ -252,7 +242,7 @@
     info.textContent = "Memuat daftar tautan...";
 
     try {
-      const data = await fetchJson(buildApiUrl({ action: "list" }));
+      const data = await fetchJson(buildApiUrl({ action: "list", shortlink_base_url: SHORTLINK_BASE_URL }));
       const items = Array.isArray(data.data) ? data.data : [];
       window.__cakgupLinks = items;
       renderLinkList(items);
@@ -288,7 +278,7 @@
       const title = item.title || slug || "Tanpa judul";
       const description = item.description || "Tautan ringkas Cakgup Shortlink.";
       const category = item.category || "umum";
-      const shortlink = item.shortlink || `${SHORTLINK_BASE_URL}/${slug}`;
+      const shortlink = `${SHORTLINK_BASE_URL}/${slug}`;
       return `
         <article class="link-card" data-search="${escapeHtml(`${title} ${description} ${category} ${slug}`.toLowerCase())}">
           <div class="link-card-main">
@@ -397,7 +387,9 @@
       description: $("#descriptionInput")?.value.trim(),
       category: $("#categoryInput")?.value.trim(),
       public: $("#publicInput")?.checked,
-      status: "aktif"
+      status: "aktif",
+      shortlink_base_url: SHORTLINK_BASE_URL,
+      shortlink: `${SHORTLINK_BASE_URL}/${normalizeSlug($("#linkNameInput")?.value || "")}`
     };
 
     if (!apiToken) {
@@ -423,7 +415,8 @@
       });
 
       if (!data.success) throw new Error(data.message || "Gagal menyimpan shortlink.");
-      msg.innerHTML = `Berhasil dibuat: <a href="${escapeHtml(data.shortlink)}" target="_blank" rel="noopener">${escapeHtml(data.shortlink)}</a>`;
+      const shortlink = `${SHORTLINK_BASE_URL}/${payload.link_name || data.link_name}`;
+      msg.innerHTML = `Berhasil dibuat: <a href="${escapeHtml(shortlink)}" target="_blank" rel="noopener">${escapeHtml(shortlink)}</a>`;
       msg.className = "message message-success";
       $("#linkForm")?.reset();
       if ($("#apiKeyInput")) $("#apiKeyInput").value = window.CakgupAuth.getApiToken?.() || apiToken;
