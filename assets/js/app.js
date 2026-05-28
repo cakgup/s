@@ -2,7 +2,7 @@
   const config = window.CAKGUP_SHORTLINK_CONFIG || {};
   const API_BASE_URL = config.API_BASE_URL || "https://script.google.com/macros/s/AKfycby916I0dtuRqtYSv9U_foaY9KN8nK8_dK49-7ab8E7BC1y3zKwTnXE2ylslbubxlh6U1A/exec";
   const SHORTLINK_BASE_URL = (config.SHORTLINK_BASE_URL || "https://cakgup.github.io/s").replace(/\/$/, "");
-  const GUNUNGAN_SRC = config.GUNUNGAN_SRC || "/s/assets/img/gunungan.png";
+  const GUNUNGAN_SRC = config.GUNUNGAN_SRC || new URL("../img/gunungan.png", document.currentScript.src).href;
   const REDIRECT_DELAY_MS = Number(config.REDIRECT_DELAY_MS || 900);
   const FETCH_TIMEOUT_MS = Number(config.FETCH_TIMEOUT_MS || 12000);
 
